@@ -2,8 +2,6 @@ package com.redhat.idaas.poc20201029;
 
 import java.util.List;
 
-import com.redhat.idaas.eventbuilder.events.platform.RoutingEvent;
-
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.ClaimCheckOperation;
@@ -17,6 +15,8 @@ import org.kie.api.io.KieResources;
 import org.kie.camel.embedded.dmn.DecisionsToHeadersProcessor;
 import org.kie.camel.embedded.dmn.ToDMNEvaluateAllCommandProcessor;
 import org.kie.camel.embedded.dmn.ToMapProcessor;
+
+import io.connectedhealth_idaas.eventbuilder.events.platform.RoutingEvent;
 
 import javax.naming.Context;
 import javax.naming.NamingException;

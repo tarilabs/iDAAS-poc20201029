@@ -6,14 +6,49 @@
 <version>1.0.0-SNAPSHOT</version>
 
 <properties>
-    <java.version>11</java.version>
+    <java.version>1.8</java.version>
+    <maven.compiler.parameters>true</maven.compiler.parameters>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <maven.compiler.version>3.8.1</maven.compiler.version>
+    <maven.release.version>2.5.3</maven.release.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <surefire-plugin.version>2.22.2</surefire-plugin.version>
+    <junit.jupiter.version>5.6.2</junit.jupiter.version>
 </properties>
+
+<distributionManagement>
+    <!-- omitting release until clarified strategy -->
+    <snapshotRepository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/tarilabs/iDAAS-poc20201029</url>
+    </snapshotRepository>
+</distributionManagement>
+
+<repositories>
+    <repository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
 
 <dependencies>
     <dependency>
-        <groupId>com.redhat.idaas</groupId>
+        <groupId>io.connectedhealth-idaas</groupId>
         <artifactId>idaas-eventbuilder</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.2.0</version>
     </dependency>
     <dependency>
         <groupId>org.kie</groupId>
