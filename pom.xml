@@ -1,11 +1,11 @@
 <project>
-<modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-<groupId>com.redhat</groupId>
-<artifactId>idaas-poc20201029</artifactId>
-<version>1.0.0-SNAPSHOT</version>
+  <groupId>com.redhat</groupId>
+  <artifactId>idaas-poc20201029</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
 
-<properties>
+  <properties>
     <java.version>1.8</java.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -16,25 +16,25 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <surefire-plugin.version>2.22.2</surefire-plugin.version>
     <junit.jupiter.version>5.6.2</junit.jupiter.version>
-</properties>
+  </properties>
 
-<distributionManagement>
+  <distributionManagement>
     <!-- omitting release until clarified strategy -->
     <snapshotRepository>
       <id>github</id>
       <name>GitHub Packages</name>
       <url>https://maven.pkg.github.com/tarilabs/iDAAS-poc20201029</url>
     </snapshotRepository>
-</distributionManagement>
+  </distributionManagement>
 
-<repositories>
+  <repositories>
     <repository>
       <id>jboss-public-repository-group</id>
       <name>JBoss Public Repository Group</name>
       <url>https://repository.jboss.org/nexus/content/groups/public/</url>
       <layout>default</layout>
       <releases>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
         <updatePolicy>never</updatePolicy>
       </releases>
       <snapshots>
@@ -44,34 +44,51 @@
     </repository>
   </repositories>
 
-<dependencies>
+  <dependencies>
     <dependency>
-        <groupId>io.connectedhealth-idaas</groupId>
-        <artifactId>idaas-eventbuilder</artifactId>
-        <version>1.2.0</version>
+      <groupId>io.connectedhealth-idaas</groupId>
+      <artifactId>idaas-eventbuilder</artifactId>
+      <version>1.2.0</version>
     </dependency>
     <dependency>
-        <groupId>org.kie</groupId>
-        <artifactId>kie-camel</artifactId> 
-        <version>7.46.0-SNAPSHOT</version>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-kafka</artifactId>
+      <version>2.25.2</version>
     </dependency>
     <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.13.1</version>
-        <scope>test</scope>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-camel</artifactId>
+      <version>7.46.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>1.2.3</version>
-        <scope>test</scope>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.1</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-test</artifactId>
-        <version>2.25.2</version>
-        <scope>test</scope>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+      <scope>test</scope>
     </dependency>
-</dependencies>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-test</artifactId>
+      <version>2.25.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>kafka</artifactId>
+      <version>1.15.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
+      <version>4.0.3</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>
