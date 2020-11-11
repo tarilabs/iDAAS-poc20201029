@@ -1,22 +1,8 @@
 package com.redhat.idaas.poc20201029;
 
+import static com.redhat.idaas.poc20201029.TestUtils.routingEvent;
+
 import java.util.List;
-
-import org.apache.camel.Processor;
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.model.ClaimCheckOperation;
-import org.apache.camel.test.junit4.CamelTestSupport;
-import org.drools.compiler.kie.builder.impl.DrlProject;
-import org.junit.Test;
-import org.kie.api.KieServices;
-import org.kie.api.builder.KieBuilder;
-import org.kie.api.builder.KieFileSystem;
-import org.kie.api.io.KieResources;
-import org.kie.camel.embedded.dmn.DecisionsToHeadersProcessor;
-import org.kie.camel.embedded.dmn.ToDMNEvaluateAllCommandProcessor;
-import org.kie.camel.embedded.dmn.ToMapProcessor;
-
-import io.connectedhealth_idaas.eventbuilder.events.platform.RoutingEvent;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
@@ -25,6 +11,7 @@ import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.model.ClaimCheckOperation;
+import org.apache.camel.test.junit4.CamelTestSupport;
 import org.drools.compiler.kie.builder.impl.DrlProject;
 import org.junit.Test;
 import org.kie.api.KieServices;
@@ -37,7 +24,7 @@ import org.kie.camel.embedded.dmn.DecisionsToHeadersProcessor;
 import org.kie.camel.embedded.dmn.ToDMNEvaluateAllCommandProcessor;
 import org.kie.camel.embedded.dmn.ToMapProcessor;
 
-import static com.redhat.idaas.poc20201029.TestUtils.*;
+import io.connectedhealth_idaas.eventbuilder.events.platform.RoutingEvent;
 
 public class MyTest extends CamelTestSupport {
     protected Context jndiContext;
@@ -97,6 +84,7 @@ public class MyTest extends CamelTestSupport {
             }
         };
     }
+    
     @Test
     public void test() throws Exception {
         RoutingEvent adt1 = routingEvent("MMS", "ADT", null);

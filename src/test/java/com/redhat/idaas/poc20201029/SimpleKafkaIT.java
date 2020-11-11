@@ -21,10 +21,10 @@ import org.junit.Test;
 import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.utility.DockerImageName;
 
-public class SimpleKafkaTest extends CamelTestSupport {
+public class SimpleKafkaIT extends CamelTestSupport {
 
     @ClassRule
-    public static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka"));
+    public static KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:5.4.3"));
 
     @Override
     protected RouteBuilder createRouteBuilder() {
