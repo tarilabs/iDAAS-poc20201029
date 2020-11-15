@@ -19,6 +19,7 @@ import org.kie.api.builder.KieBuilder;
 import org.kie.api.builder.KieFileSystem;
 import org.kie.api.builder.Message;
 import org.kie.api.io.KieResources;
+import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.camel.embedded.dmn.DecisionsToHeadersProcessor;
 import org.kie.camel.embedded.dmn.ToDMNEvaluateAllCommandProcessor;
@@ -26,7 +27,7 @@ import org.kie.camel.embedded.dmn.ToMapProcessor;
 
 import io.connectedhealth_idaas.eventbuilder.events.platform.RoutingEvent;
 
-public class MyTest extends CamelTestSupport {
+public class StandaloneCamelTest extends CamelTestSupport {
     protected Context jndiContext;
 
     @Override
@@ -38,19 +39,9 @@ public class MyTest extends CamelTestSupport {
 
     protected void configureDroolsContext(Context jndiContext) {
         KieServices ks = KieServices.Factory.get();
-        KieFileSystem kfs = ks.newKieFileSystem();
-        KieResources kieResources = ks.getResources();
-
-        kfs.write("src/main/resources/RoutingEvent.dmn", kieResources.newClassPathResource("/RoutingEvent.dmn", this.getClass()));
-
-        KieBuilder kieBuilder = ks.newKieBuilder(kfs).buildAll(DrlProject.class);
-
-        List<Message> errors = kieBuilder.getResults().getMessages(Message.Level.ERROR);
-        if (!errors.isEmpty()) {
-            fail("" + errors);
-        }
-
-        KieSession ksession = ks.newKieContainer(ks.getRepository().getDefaultReleaseId()).newKieSession();
+        KieContainer kieContainer = ks.getKieClasspathContainer();
+        System.out.println(kieContainer.getKieBaseNames());
+        KieSession ksession = kieContainer.getKieBase("demo-embedded").newKieSession();
 
         try {
             jndiContext.bind("ksession1", ksession);
