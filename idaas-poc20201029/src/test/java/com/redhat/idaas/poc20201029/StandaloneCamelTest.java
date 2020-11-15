@@ -2,8 +2,6 @@ package com.redhat.idaas.poc20201029;
 
 import static com.redhat.idaas.poc20201029.TestUtils.routingEvent;
 
-import java.util.List;
-
 import javax.naming.Context;
 import javax.naming.NamingException;
 
@@ -12,13 +10,8 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.model.ClaimCheckOperation;
 import org.apache.camel.test.junit4.CamelTestSupport;
-import org.drools.compiler.kie.builder.impl.DrlProject;
 import org.junit.Test;
 import org.kie.api.KieServices;
-import org.kie.api.builder.KieBuilder;
-import org.kie.api.builder.KieFileSystem;
-import org.kie.api.builder.Message;
-import org.kie.api.io.KieResources;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.camel.embedded.dmn.DecisionsToHeadersProcessor;
@@ -65,13 +58,12 @@ public class StandaloneCamelTest extends CamelTestSupport {
                                     .process(dmnToHeader)
                                     .claimCheck(ClaimCheckOperation.Pop)
                                     .to("log:com.redhat.idaas?level=INFO&showAll=true&multiline=true")
-                                    .choice()
-                                    .when(simple("${header.topicsHeader} contains 'MMSAllADT'"))
+                                    .filter(simple("${header.topicsHeader} contains 'MMSAllADT'"))
                                         .to("mock:MMSAllADT")
-                                    .when(simple("${header.topicsHeader} contains 'MMSDischarges'"))
+                                    .end()
+                                    .filter(simple("${header.topicsHeader} contains 'MMSDischarges'"))
                                         .to("mock:MMSDischarges")
-                                    .otherwise()
-                                        .to("mock:undefined");
+                                    .end();
             }
         };
     }
@@ -89,9 +81,6 @@ public class StandaloneCamelTest extends CamelTestSupport {
         MockEndpoint mockMMSDischarges = getMockEndpoint("mock:MMSDischarges");
         mockMMSDischarges.expectedMessageCount(1);
         mockMMSDischarges.expectedBodiesReceived(discharge1);
-        MockEndpoint mockundefined = getMockEndpoint("mock:undefined");
-        mockundefined.expectedMessageCount(1);
-        mockundefined.expectedBodiesReceived(mms);
 
         template.requestBody("direct:start", adt1);
         template.requestBody("direct:start", adt2);
@@ -99,5 +88,6 @@ public class StandaloneCamelTest extends CamelTestSupport {
         template.requestBody("direct:start", mms);
 
         mockMMSAllADT.assertIsSatisfied();
+        mockMMSDischarges.assertIsSatisfied();
     }
 }
