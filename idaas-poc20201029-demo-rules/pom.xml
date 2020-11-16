@@ -31,7 +31,7 @@
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kie-dmn-core</artifactId>
-      <version>${version.kie}</version>
+      <version>${version.org.kie}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -41,7 +41,7 @@
       <plugin>
         <groupId>org.kie</groupId>
         <artifactId>kie-maven-plugin</artifactId>
-        <version>${version.kie}</version>
+        <version>${version.org.kie}</version>
         <extensions>true</extensions>
       </plugin>
     </plugins>

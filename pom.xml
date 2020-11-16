@@ -16,7 +16,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <surefire-plugin.version>2.22.2</surefire-plugin.version>
-    <version.kie>7.45.0.Final</version.kie>
+    <version.org.kie>7.46.0.Final</version.org.kie>
+    <version.org.apache.camel>2.25.2</version.org.apache.camel>
   </properties>
 
   <distributionManagement>
@@ -35,7 +36,7 @@
       <url>https://repository.jboss.org/nexus/content/groups/public/</url>
       <layout>default</layout>
       <releases>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <updatePolicy>never</updatePolicy>
       </releases>
       <snapshots>
